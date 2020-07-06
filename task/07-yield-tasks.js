@@ -33,9 +33,23 @@
  *
  */
 function* get99BottlesOfBeer() {
-    throw new Error('Not implemented');
+    let i = 99,
+        line = true;
+    while (i > 0) {
+        if (line)
+            yield `${i} bottle${i > 1 ? 's' : ''} of beer on the wall, ${i} bottle${i > 1 ? 's' : ''} of beer.`;
+        else {
+            --i;
+            if (i)
+                yield `Take one down and pass it around, ${i} bottle${i > 1 ? 's' : ''} of beer on the wall.`;
+            else
+                yield 'Take one down and pass it around, no more bottles of beer on the wall.';
+        }
+        line = !line;
+    }
+    yield 'No more bottles of beer on the wall, no more bottles of beer.';
+    yield 'Go to the store and buy some more, 99 bottles of beer on the wall.';
 }
-
 
 /**
  * Returns the Fibonacci sequence:
@@ -47,7 +61,15 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-    throw new Error('Not implemented');
+    let a = 0,
+    b = 1; 
+        while (true) {
+            let x = a;
+            a = b;
+            b = a + x;
+            yield x;
+        }
+    // throw new Error('Not implemented');
 }
 
 
@@ -82,7 +104,15 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-    throw new Error('Not implemented');
+    let stack = [root];
+    while (stack.length > 0) {
+        root = stack.pop();
+        yield root;
+        if (typeof root.children !== 'undefined')
+            for (let value of root.children.reverse())
+                stack.push(value);
+    }
+    // throw new Error('Not implemented');
 }
 
 
@@ -108,7 +138,16 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
-    throw new Error('Not implemented');
+    let queue = [root];
+    while (queue.length > 0) {
+        root = queue.shift();
+        yield root;
+        if (typeof root.children !== 'undefined')
+            for (let value of root.children)
+                queue.push(value);
+    }
+
+    // throw new Error('Not implemented');
 }
 
 
@@ -126,7 +165,20 @@ function* breadthTraversalTree(root) {
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
 function* mergeSortedSequences(source1, source2) {
-    throw new Error('Not implemented');
+    let s1 = source1(),
+    s2 = source2(),
+    value1 = s1.next().value,
+    value2 = s2.next().value;
+while (true)
+    if ((value1 < value2 || value2 === undefined) && value1 !== undefined) {
+        yield value1;
+        value1 = s1.next().value;
+    } else if (value2 !== undefined) {
+        yield value2;
+        value2 = s2.next().value;
+    } else
+        break;
+    // throw new Error('Not implemented');
 }
 
 /**
@@ -144,9 +196,21 @@ function* mergeSortedSequences(source1, source2) {
  *
  *   Most popular implementation of the logic in npm https://www.npmjs.com/package/co
  */
+
 function async(generator) {
-    throw new Error('Not implemented');
-}
+    let gen = generator();
+    return asyncRec(gen, gen.next());
+   }
+   
+   function asyncRec(g, nextVal){
+      return nextVal.value.then(v=>{
+        let n = g.next(v);
+        if (n.done) {
+          return Promise.resolve(n.value);
+        }
+        return asyncRec(g, n);
+      }) 
+   }
 
 
 module.exports = {
