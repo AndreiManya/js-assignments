@@ -133,8 +133,8 @@ let CSS_SELECTOR_ERRORS = [
     'Element, id and pseudo-element should not occur more then one time inside the selector',
     'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element'
 ];
-function cssSelector(fromCombine ='') {
-    
+function cssSelector(fromCombine ) {
+    fromCombine ? fromCombine = fromCombine : fromCombine = '';
     
     const values = {
         element: '',
