@@ -279,7 +279,7 @@ function reverseInteger(num) {
  */
 function isCreditCardNumber(ccn) {
     
-    // throw new Error('Not implemented');
+    throw new Error('Not implemented');
 }
 
 
