@@ -128,7 +128,7 @@ function removeFalsyValues(arr) {
  *    [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ]  => [ 'A', 'B', 'C', 'D', 'E', 'F', 'G' ]
  */
 function getUpperCaseStrings(arr) {
-   return arr.toString().toUpperCase().split(',');
+   return arr.map((e)=>e.toUpperCase());
    // throw new Error('Not implemented');
 }
 
@@ -451,8 +451,14 @@ function toStringList(arr) {
  */
 function sortCitiesArray(arr) {
    return arr.sort((a,b)=> {
-      if(a.country > b.country){return 1} 
-      else if(a.country == b.country) {return a.city > b.city ? 1 : -1} else {return -1}});
+      if (a.country > b.country) {
+         return 1;
+      }
+      if ( a.country == b.country ) {
+         return a.city > b.city ? 1 : -1;
+      } 
+      return -1;
+   });
       // throw new Error('Not implemented');
 }
 
