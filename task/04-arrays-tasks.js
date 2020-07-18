@@ -620,9 +620,14 @@ function getElementByIndexes(arr, indexes) {
  * 
  */
 function swapHeadAndTail(arr) {
-   let half = Math.floor(arr.length / 2),
-   half2 = arr.length % 2;
-   return arr.map((v, i) => arr[half2 && i === half? i : (i + half + (i <= half ? half2 : 0)) % arr.length]);
+   let swap = [];
+   swap.push(...arr.slice(Math.round(arr.length/2), arr.length+1));
+   if (arr.length%2) { 
+      swap.push(arr[Math.floor(arr.length/2)]);
+   }
+   swap.push(...arr.slice(0 ,Math.floor(arr.length/2)));  
+   return swap;
+
    //  throw new Error('Not implemented');
 }
 
