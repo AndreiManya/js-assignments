@@ -69,12 +69,14 @@ function getPowerFunction(exponent) {
  */
 function getPolynom() {
     let args = arguments;
-    if (args.length == 0 )
+    if (args.length == 0 ) {
         return null;
+    }
     return (x)=>{
         let result = 0;
-        for (let i = 0; i < args.length; i++)
+        for (let i = 0; i < args.length; i++) { 
             result += args[i] * Math.pow(x, args.length - i - 1);
+        }
         return result;
     };
     // throw new Error('Not implemented');
@@ -122,16 +124,12 @@ function retry(func, attempts) {
         for(let i=0; i<=attempts; i++){
             try { 
                 return func();
-            
-            }
-            catch (e){
-                if(i == attempts){
-                    throw new Error("fulyError");
-                }
+            } catch(e) { 
+                continue;
             }
         }
-    }
-    // throw new Error('Not implemented');
+        throw new Error('fulyError');
+    };
 }
 
 /**
