@@ -33,17 +33,17 @@
  *
  */
 function* get99BottlesOfBeer() {
-    let i = 99,
-        line = true;
-    while (i > 0) {
-        if (line)
+    let line = true;
+    for(let i = 99; i>=0; --i ) {
+        if (line) { 
+            i<99 ? i+=1 : i;
             yield `${i} bottle${i > 1 ? 's' : ''} of beer on the wall, ${i} bottle${i > 1 ? 's' : ''} of beer.`;
-        else {
-            --i;
-            if (i)
+        } else {
+            if (i) {
                 yield `Take one down and pass it around, ${i} bottle${i > 1 ? 's' : ''} of beer on the wall.`;
-            else
+            } else { 
                 yield 'Take one down and pass it around, no more bottles of beer on the wall.';
+            }
         }
         line = !line;
     }
@@ -63,12 +63,12 @@ function* get99BottlesOfBeer() {
 function* getFibonacciSequence() {
     let a = 0,
     b = 1; 
-        while (true) {
-            let x = a;
-            a = b;
-            b = a + x;
-            yield x;
-        }
+    while (true) {
+        let x = a;
+        a = b;
+        b = a + x;
+        yield x;
+    }
     // throw new Error('Not implemented');
 }
 
@@ -104,13 +104,12 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-    let stack = [root];
-    while (stack.length > 0) {
-        root = stack.pop();
-        yield root;
-        if (typeof root.children !== 'undefined')
-            for (let value of root.children.reverse())
-                stack.push(value);
+    let stack= [root];    
+    while(stack.length){
+      let root = stack.pop();
+      yield root;
+      if(root.children)
+      stack.push(...root.children.reverse());
     }
     // throw new Error('Not implemented');
 }
@@ -169,15 +168,16 @@ function* mergeSortedSequences(source1, source2) {
     s2 = source2(),
     value1 = s1.next().value,
     value2 = s2.next().value;
-while (true)
-    if ((value1 < value2 || value2 === undefined) && value1 !== undefined) {
-        yield value1;
-        value1 = s1.next().value;
-    } else if (value2 !== undefined) {
-        yield value2;
-        value2 = s2.next().value;
-    } else
-        break;
+    while (value1 !== undefined || value2 !== undefined) {
+        if ((value1 < value2 || value2 === undefined) && value1 !== undefined) {
+            yield value1;
+            value1 = s1.next().value;
+        }
+        if (value2 !== undefined) {
+            yield value2;
+            value2 = s2.next().value;
+        } 
+    }
     // throw new Error('Not implemented');
 }
 
@@ -200,17 +200,17 @@ while (true)
 function async(generator) {
     let gen = generator();
     return asyncRec(gen, gen.next());
-   }
+}
    
-   function asyncRec(g, nextVal){
-      return nextVal.value.then(v=>{
+function asyncRec(g, nextVal){
+    return nextVal.value.then(v=>{
         let n = g.next(v);
         if (n.done) {
-          return Promise.resolve(n.value);
+            return Promise.resolve(n.value);
         }
         return asyncRec(g, n);
-      }) 
-   }
+    });
+}
 
 
 module.exports = {
