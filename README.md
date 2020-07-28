@@ -1,3 +1,15 @@
+# Task 1-4 https://travis-ci.org/github/AndreiManya/js-assignments/builds/709425418
+# Task 5 https://travis-ci.org/github/AndreiManya/js-assignments/builds/710436048
+# Task 6 https://travis-ci.org/github/AndreiManya/js-assignments/builds/710269635
+# Task 7 https://travis-ci.org/github/AndreiManya/js-assignments/builds/710271462
+# Task 8 https://travis-ci.org/github/AndreiManya/js-assignments/builds/709447097
+# Task 9 https://travis-ci.org/github/AndreiManya/js-assignments/builds/710278612
+
+
+
+
+
+
 [![Brest Rolling Scopes](http://brest.rollingscopes.com/images/logo_rs_text.svg)](http://brest.rollingscopes.com/)
 #Brest Rolling Scopes School
 ## Javascript Assignments  [![Build Status](https://travis-ci.org/AisBrestEDU/js-assignments.svg?branch=master)](https://travis-ci.org/AisBrestEDU/js-assignments)
